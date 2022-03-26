@@ -1,14 +1,18 @@
 import { Button, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 import { FormEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { login } from '../actions/User.actions';
 import { Input } from '../components';
 
 export default function SignIn() {
   const [inputUser, setInputUser] = useState('');
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // implement login
+    dispatch(login(inputUser));
   };
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
