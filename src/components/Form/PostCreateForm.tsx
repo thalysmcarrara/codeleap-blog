@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createPostAction } from '../../actions/Post.actions';
 import {
   getIsloadingPostSelector,
-  getIsShowAlertCreate,
+  getIsShowAlertCreateSelector,
 } from '../../actions/selectors';
 import config from '../../config';
 
@@ -23,7 +23,7 @@ export function PostCreateForm() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const isLoading = useSelector(getIsloadingPostSelector);
-  const isShowAlertCreate = useSelector(getIsShowAlertCreate);
+  const isShowAlertCreate = useSelector(getIsShowAlertCreateSelector);
   const toast = useToast();
 
   useEffect(() => {
@@ -33,6 +33,7 @@ export function PostCreateForm() {
         status: 'success',
         duration: 4000,
         isClosable: true,
+        position: 'top',
       });
     }
   }, [isShowAlertCreate]);
@@ -128,15 +129,15 @@ export function PostCreateForm() {
       <HStack justifyContent="end">
         <Button
           isLoading={isLoading}
-          // disabled
+          disabled={!(title && content)}
           type="submit"
           px="30px"
           py="7px"
           bg="black"
           color="white"
           _hover={{
-            bg: 'green.400',
-            color: 'black',
+            bg: title && content && 'green.400',
+            color: title && content && 'black',
           }}
         >
           CREATE
