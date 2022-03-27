@@ -1,35 +1,57 @@
 export const LOGIN = 'LOGIN';
 export const GET_PERSISTED_USER = 'GET_PERSISTED_USER';
-export const POST_LOADING = 'POST_LOADING';
-export const POST_FAIL = 'POST_FAIL';
-export const POST_SUCCESS = 'POST_SUCCESS';
+export const POST_CREATE_LOADING = 'POST_CREATE_LOADING';
+export const POST_CREATE_FAIL = 'POST_CREATE_FAIL';
+export const POST_CREATE_SUCCESS = 'POST_CREATE_SUCCESS';
 export const TOGGLE_SUCCESS_ALERT_CREATE = 'SHOW_SUCCESS_ALERT_CREATE';
+export const GET_POSTS = 'GET_POSTS';
 
 export type PostType = {
+  id: number;
   username: string;
+  created_datetime: string;
   title: string;
   content: string;
 };
 
+export type GetRequestPostsType = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: PostType[];
+};
+
+// export interface GetPostReturn {
+//   countPosts: number;
+//   next: string | null;
+//   previous: string | null;
+//   posts: PostType[];
+// }
+
 export interface PostLoading {
-  type: typeof POST_LOADING;
+  type: typeof POST_CREATE_LOADING;
 }
 
 export interface PostFail {
-  type: typeof POST_FAIL;
+  type: typeof POST_CREATE_FAIL;
 }
 
 export interface PostSuccess {
-  type: typeof POST_SUCCESS;
-  payload: PostType;
+  type: typeof POST_CREATE_SUCCESS;
 }
 
 export interface IsShowCreateAlert {
   type: typeof TOGGLE_SUCCESS_ALERT_CREATE;
 }
 
+export interface GetPosts {
+  type: typeof GET_POSTS;
+  payload: GetRequestPostsType;
+}
+
 export type PostDispatchTypes =
   | PostLoading
   | PostFail
   | PostSuccess
+  | GetPosts
   | IsShowCreateAlert;

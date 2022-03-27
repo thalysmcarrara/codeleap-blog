@@ -1,29 +1,29 @@
 import {
-  POST_FAIL,
-  POST_LOADING,
-  POST_SUCCESS,
+  POST_CREATE_FAIL,
+  POST_CREATE_LOADING,
+  POST_CREATE_SUCCESS,
+  GET_POSTS,
   PostDispatchTypes,
   TOGGLE_SUCCESS_ALERT_CREATE,
+  PostType,
 } from '../actions/actionsTypes';
 
-type Post = {
-  id: number;
-  username: string;
-  created_datetime: string;
-  title: string;
-  content: string;
-};
-
 interface DefaultState {
-  loading: boolean;
+  isCreateLoading: boolean;
   isShowCreateAlert: boolean;
-  posts: Post[];
+  results: PostType[];
+  count: number;
+  next: string | null;
+  previous: string | null;
 }
 
 const defaultState: DefaultState = {
-  loading: false,
+  isCreateLoading: false,
   isShowCreateAlert: false,
-  posts: [],
+  results: [],
+  count: 0,
+  next: null,
+  previous: null,
 };
 
 const postReducer = (
@@ -31,22 +31,26 @@ const postReducer = (
   action: PostDispatchTypes
 ): DefaultState => {
   switch (action.type) {
-    case POST_FAIL:
+    case POST_CREATE_FAIL:
       return {
         ...state,
-        loading: false,
+        isCreateLoading: false,
       };
-    case POST_LOADING:
+    case POST_CREATE_LOADING:
       return {
         ...state,
-        loading: true,
+        isCreateLoading: true,
       };
-    case POST_SUCCESS:
+    case POST_CREATE_SUCCESS:
       return {
         ...state,
-        loading: false,
+        isCreateLoading: false,
       };
-
+    case GET_POSTS:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case TOGGLE_SUCCESS_ALERT_CREATE:
       return {
         ...state,
