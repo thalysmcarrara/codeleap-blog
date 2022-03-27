@@ -1,7 +1,9 @@
 import { RootStore } from '../../redux/store';
 
 export const getIsloadingPostSelector = (state: RootStore) =>
-  state.posts.loading;
+  state.posts.isCreateLoading;
 
-export const getIsShowAlertCreate = (state: RootStore) =>
+export const getIsShowAlertCreateSelector = (state: RootStore) =>
   state.posts.isShowCreateAlert;
+
+export const getPostsSelector = (state: RootStore) => state.posts.results;
