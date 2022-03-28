@@ -19,7 +19,7 @@ import {
 } from '../../actions/selectors';
 import config from '../../config';
 
-export function PostCreateForm() {
+export function FormCreatePost() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const isLoading = useSelector(getIsloadingPostSelector);
@@ -55,7 +55,7 @@ export function PostCreateForm() {
       as="form"
       mt="10"
       mb="8"
-      px="8"
+      px={['3', '8']}
       pt="6"
       pb="8"
       border="1px"
