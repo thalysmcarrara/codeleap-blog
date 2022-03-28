@@ -5,11 +5,13 @@ import { EditPostModal } from '../EditPostModal';
 interface MenuItemEditProps {
   oldTitle: string;
   oldContent: string;
+  postId: number;
 }
 
 export default function MenuItemEdit({
   oldTitle,
   oldContent,
+  postId,
 }: MenuItemEditProps) {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
@@ -20,6 +22,7 @@ export default function MenuItemEdit({
         onClose={onClose}
         oldTitle={oldTitle}
         oldContent={oldContent}
+        postId={postId}
       />
     </MenuItem>
   );

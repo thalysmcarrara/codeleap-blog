@@ -6,9 +6,10 @@ import { EditPostModal } from './EditPostModal';
 interface ButtonEditProps {
   oldTitle: string;
   oldContent: string;
+  postId: number;
 }
 
-export function ButtonEdit({ oldContent, oldTitle }: ButtonEditProps) {
+export function ButtonEdit({ oldContent, oldTitle, postId }: ButtonEditProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -29,6 +30,7 @@ export function ButtonEdit({ oldContent, oldTitle }: ButtonEditProps) {
         onClose={onClose}
         oldContent={oldContent}
         oldTitle={oldTitle}
+        postId={postId}
       />
     </>
   );

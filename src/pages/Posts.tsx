@@ -1,20 +1,37 @@
-import { Flex, VStack } from '@chakra-ui/react';
+import { Flex, useToast, VStack } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getPostsAction } from '../actions/Post.actions';
-import { getPostsSelector } from '../actions/selectors';
+import { getIsCloseModal, getPostsSelector } from '../actions/selectors';
 import { getPersistedUserAction } from '../actions/User.actions';
 import { Post, FormCreatePost } from '../components';
 import Header from '../components/Header';
 
 export default function Posts() {
   const posts = useSelector(getPostsSelector);
+  const isCloseEditModal = useSelector(getIsCloseModal);
+
   const dispatch = useDispatch();
+  const toast = useToast();
+
   useEffect(() => {
     dispatch(getPersistedUserAction());
     dispatch(getPostsAction());
   }, []);
+
+  useEffect(() => {
+    if (isCloseEditModal) {
+      dispatch(getPostsAction());
+      toast({
+        title: 'Post Edited',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
+    }
+  }, [isCloseEditModal]);
 
   return (
     <Flex direction="column" maxWidth={800} bg="white" mx="auto">

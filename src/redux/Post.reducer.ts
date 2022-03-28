@@ -1,4 +1,5 @@
 import {
+  POST_EDIT_LOADING,
   POST_CREATE_FAIL,
   POST_CREATE_LOADING,
   POST_CREATE_SUCCESS,
@@ -6,11 +7,14 @@ import {
   PostDispatchTypes,
   TOGGLE_SUCCESS_ALERT_CREATE,
   PostType,
+  CLOSE_EDIT_MODAL,
 } from '../actions/actionsTypes';
 
 interface DefaultState {
   isCreateLoading: boolean;
   isShowCreateAlert: boolean;
+  isEditLoading: boolean;
+  isCloseEditModal: boolean;
   results: PostType[];
   count: number;
   next: string | null;
@@ -20,6 +24,8 @@ interface DefaultState {
 const defaultState: DefaultState = {
   isCreateLoading: false,
   isShowCreateAlert: false,
+  isEditLoading: false,
+  isCloseEditModal: false,
   results: [],
   count: 0,
   next: null,
@@ -55,6 +61,16 @@ const postReducer = (
       return {
         ...state,
         isShowCreateAlert: !state.isShowCreateAlert,
+      };
+    case CLOSE_EDIT_MODAL:
+      return {
+        ...state,
+        isCloseEditModal: !state.isCloseEditModal,
+      };
+    case POST_EDIT_LOADING:
+      return {
+        ...state,
+        isEditLoading: !state.isEditLoading,
       };
     default:
       return state;

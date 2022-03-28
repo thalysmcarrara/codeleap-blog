@@ -12,13 +12,18 @@ import {
   ModalOverlay,
   Textarea,
 } from '@chakra-ui/react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { saveEditedPost } from '../../../actions/Post.actions';
+import { getIsCloseModal, getIsEditLoading } from '../../../actions/selectors';
 
 interface EditPostModalProps {
   onClose: () => void;
   isOpen: boolean;
   oldTitle: string;
   oldContent: string;
+  postId: number;
 }
 
 export function EditPostModal({
@@ -26,11 +31,27 @@ export function EditPostModal({
   onClose,
   oldContent,
   oldTitle,
+  postId,
 }: EditPostModalProps) {
   const [title, setTitle] = useState(oldTitle);
   const [content, setContent] = useState(oldContent);
   const initialRef = useRef();
   const finalRef = useRef();
+
+  const dispatch = useDispatch();
+  const isCloseEditModal = useSelector(getIsCloseModal);
+  const isEditLoading = useSelector(getIsEditLoading);
+
+  useEffect(() => {
+    if (isCloseEditModal) {
+      onClose();
+    }
+  }, [isCloseEditModal]);
+
+  const handleSave = () => {
+    dispatch(saveEditedPost({ title, content, postId }));
+  };
+
   return (
     <Modal
       initialFocusRef={initialRef.current}
@@ -103,6 +124,8 @@ export function EditPostModal({
 
         <ModalFooter>
           <Button
+            isLoading={isEditLoading}
+            onClick={handleSave}
             borderRadius="none"
             disabled={!(title && content)}
             type="submit"

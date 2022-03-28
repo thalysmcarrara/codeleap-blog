@@ -12,7 +12,7 @@ import {
 import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createPostAction } from '../../actions/Post.actions';
+import { createPostAction, getPostsAction } from '../../actions/Post.actions';
 import {
   getIsloadingPostSelector,
   getIsShowAlertCreateSelector,
@@ -26,8 +26,11 @@ export function FormCreatePost() {
   const isShowAlertCreate = useSelector(getIsShowAlertCreateSelector);
   const toast = useToast();
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (isShowAlertCreate) {
+      dispatch(getPostsAction());
       toast({
         title: 'Post Created',
         status: 'success',
@@ -37,8 +40,6 @@ export function FormCreatePost() {
       });
     }
   }, [isShowAlertCreate]);
-
-  const dispatch = useDispatch();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

@@ -7,9 +7,14 @@ import MenuItemEdit from './MenuItemEdit';
 interface MenuHamburguerProps {
   oldContent: string;
   oldTitle: string;
+  postId: number;
 }
 
-export function MenuHamburguer({ oldContent, oldTitle }: MenuHamburguerProps) {
+export function MenuHamburguer({
+  oldContent,
+  oldTitle,
+  postId,
+}: MenuHamburguerProps) {
   return (
     <Menu>
       <MenuButton>
@@ -17,7 +22,11 @@ export function MenuHamburguer({ oldContent, oldTitle }: MenuHamburguerProps) {
       </MenuButton>
       <MenuList>
         <MenuItemDelete />
-        <MenuItemEdit oldContent={oldContent} oldTitle={oldTitle} />
+        <MenuItemEdit
+          oldContent={oldContent}
+          oldTitle={oldTitle}
+          postId={postId}
+        />
       </MenuList>
     </Menu>
   );

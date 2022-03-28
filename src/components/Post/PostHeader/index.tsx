@@ -7,9 +7,14 @@ import { MenuHamburguer } from './MenuHamburguer';
 interface PostHeaderProps {
   title: string;
   content: string;
+  postId: number;
 }
 
-export default function PostHeader({ title, content }: PostHeaderProps) {
+export default function PostHeader({
+  title,
+  content,
+  postId,
+}: PostHeaderProps) {
   return (
     <Flex
       minH="70px"
@@ -31,11 +36,11 @@ export default function PostHeader({ title, content }: PostHeaderProps) {
       <Hide below="sm">
         <HStack spacing="7">
           <ButtonDelete />
-          <ButtonEdit oldContent={content} oldTitle={title} />
+          <ButtonEdit oldContent={content} oldTitle={title} postId={postId} />
         </HStack>
       </Hide>
       <Show below="sm">
-        <MenuHamburguer oldContent={content} oldTitle={title} />
+        <MenuHamburguer oldContent={content} oldTitle={title} postId={postId} />
       </Show>
     </Flex>
   );

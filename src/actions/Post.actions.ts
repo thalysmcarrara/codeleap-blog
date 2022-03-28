@@ -3,18 +3,26 @@ import { Dispatch } from 'redux';
 import api from '../service/api';
 import {
   POST_CREATE_FAIL,
+  POST_EDIT_LOADING,
   POST_CREATE_LOADING,
   POST_CREATE_SUCCESS,
   GET_POSTS,
   GetRequestPostsType,
   TOGGLE_SUCCESS_ALERT_CREATE,
   PostDispatchTypes,
+  CLOSE_EDIT_MODAL,
 } from './actionsTypes';
 
 interface Post {
   username: string;
   title: string;
   content: string;
+}
+
+interface SaveEditedIdParams {
+  content: string;
+  title: string;
+  postId: number;
 }
 
 export const getPostsAction =
@@ -29,6 +37,31 @@ export const getPostsAction =
         payload: response,
       });
     } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const saveEditedPost =
+  ({ content, title, postId }: SaveEditedIdParams) =>
+  async (dispatch: Dispatch<PostDispatchTypes>) => {
+    try {
+      dispatch({
+        type: POST_EDIT_LOADING,
+      });
+      await api.patch(`/careers/${postId}/`, { title, content });
+      dispatch({
+        type: POST_EDIT_LOADING,
+      });
+      dispatch({
+        type: CLOSE_EDIT_MODAL,
+      });
+      dispatch({
+        type: CLOSE_EDIT_MODAL,
+      });
+    } catch (error) {
+      dispatch({
+        type: POST_EDIT_LOADING,
+      });
       console.log(error);
     }
   };
