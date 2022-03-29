@@ -48,6 +48,8 @@ export function FormCreatePost() {
     const post = { username, title, content };
 
     dispatch(createPostAction(post));
+    setTitle('');
+    setContent('');
   };
 
   return (
@@ -85,6 +87,7 @@ export function FormCreatePost() {
         </FormLabel>
         <Input
           fontSize="sm"
+          value={title}
           id="title-create"
           type="text"
           border="1px"
@@ -111,6 +114,7 @@ export function FormCreatePost() {
           Content
         </FormLabel>
         <Textarea
+          value={content}
           fontSize="sm"
           id="content-create"
           border="1px"
