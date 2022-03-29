@@ -33,11 +33,12 @@ interface SaveEditedIdParams {
 }
 
 export const getPostsAction =
-  (link = '/careers/') =>
+  (link?: string | null | undefined) =>
   async (dispatch: Dispatch<PostDispatchTypes>) => {
     try {
+      const formatedLink = link ? link.slice(25, link.length) : '/careers/';
       const response: GetRequestPostsType = await api
-        .get(link.replace(API_BASE_URL, ''))
+        .get(`${formatedLink}`)
         .then((res) => res.data);
 
       dispatch({

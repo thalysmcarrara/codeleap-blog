@@ -11,11 +11,11 @@ export function Pagination() {
   const dispatch = useDispatch();
 
   const handleNext = () => {
-    dispatch(getPostsAction(next || undefined));
+    dispatch(getPostsAction(next));
   };
 
   const handlePrevious = () => {
-    dispatch(getPostsAction(previous || undefined));
+    dispatch(getPostsAction(previous));
   };
 
   return (
