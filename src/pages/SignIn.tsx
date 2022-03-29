@@ -1,18 +1,34 @@
 import { Button, Flex, SimpleGrid, Text } from '@chakra-ui/react';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { login } from '../actions/User.actions';
+import { loginAction } from '../actions/User.actions';
 import { Input } from '../components';
+import config from '../config';
+
+const {
+  constants: { TOKEN_KEY },
+} = config;
 
 export default function SignIn() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isLogged = !!localStorage.getItem(TOKEN_KEY);
+    if (isLogged) {
+      navigate('/posts');
+    }
+  }, []);
+
   const [inputUser, setInputUser] = useState('');
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(login(inputUser));
+    dispatch(loginAction(inputUser));
+    navigate('/posts');
   };
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
@@ -59,6 +75,7 @@ export default function SignIn() {
             color="white"
             _hover={{
               bg: 'green.400',
+              color: 'black',
             }}
           >
             ENTER

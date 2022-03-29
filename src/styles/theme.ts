@@ -4,7 +4,9 @@ export const theme = extendTheme({
   colors: {
     gray: {
       '100': '#DDDDDD',
-      '200': '#777777',
+      '200': '#CCCCCC',
+      '300': '#999999',
+      '400': '#777777',
     },
   },
 
@@ -24,7 +26,7 @@ export const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: 'white',
+        bg: 'gray.100',
         color: 'black',
       },
     },
