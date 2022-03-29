@@ -1,6 +1,5 @@
 import { Dispatch } from 'redux';
 
-import config from '../config';
 import api from '../service/api';
 import {
   POST_CREATE_FAIL,
@@ -15,10 +14,6 @@ import {
   POST_DELETE_LOADING,
   CLOSE_DELETE_DIALOG,
 } from './actionsTypes';
-
-const {
-  constants: { API_BASE_URL },
-} = config;
 
 interface Post {
   username: string;
