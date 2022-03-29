@@ -3,7 +3,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getPostsAction } from '../actions/Post.actions';
-import { getIsCloseModal, getPostsSelector } from '../actions/selectors';
+import {
+  getIsCloseDeleteDialog,
+  getIsCloseModal,
+  getPostsSelector,
+} from '../actions/selectors';
 import { getPersistedUserAction } from '../actions/User.actions';
 import { Post, FormCreatePost } from '../components';
 import Header from '../components/Header';
@@ -11,6 +15,7 @@ import Header from '../components/Header';
 export default function Posts() {
   const posts = useSelector(getPostsSelector);
   const isCloseEditModal = useSelector(getIsCloseModal);
+  const isCloseDeleteLoading = useSelector(getIsCloseDeleteDialog);
 
   const dispatch = useDispatch();
   const toast = useToast();
@@ -19,6 +24,19 @@ export default function Posts() {
     dispatch(getPersistedUserAction());
     dispatch(getPostsAction());
   }, []);
+
+  useEffect(() => {
+    if (isCloseDeleteLoading) {
+      dispatch(getPostsAction());
+      toast({
+        title: 'Post Deleted',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+        position: 'top',
+      });
+    }
+  }, [isCloseDeleteLoading]);
 
   useEffect(() => {
     if (isCloseEditModal) {

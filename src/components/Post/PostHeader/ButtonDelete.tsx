@@ -3,7 +3,11 @@ import { MdDeleteForever } from 'react-icons/md';
 
 import { DeleteDialog } from './DeleteDialog';
 
-export function ButtonDelete() {
+interface ButtonDeleteProps {
+  postId: number;
+}
+
+export function ButtonDelete({ postId }: ButtonDeleteProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -19,7 +23,7 @@ export function ButtonDelete() {
         }}
         icon={<MdDeleteForever color="white" size="30" />}
       />
-      <DeleteDialog isOpen={isOpen} onClose={onClose} />
+      <DeleteDialog isOpen={isOpen} onClose={onClose} postId={postId} />
     </>
   );
 }

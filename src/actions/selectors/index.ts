@@ -12,3 +12,9 @@ export const getIsCloseModal = (state: RootStore) =>
   state.posts.isCloseEditModal;
 
 export const getIsEditLoading = (state: RootStore) => state.posts.isEditLoading;
+
+export const getIsDeleteLoading = (state: RootStore) =>
+  state.posts.isDeleteLoading;
+
+export const getIsCloseDeleteDialog = (state: RootStore) =>
+  state.posts.isCloseDeleteLoading;

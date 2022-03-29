@@ -2,11 +2,13 @@ export const LOGIN = 'LOGIN';
 export const GET_PERSISTED_USER = 'GET_PERSISTED_USER';
 export const POST_CREATE_LOADING = 'POST_CREATE_LOADING';
 export const POST_EDIT_LOADING = 'POST_EDIT_LOADING';
+export const POST_DELETE_LOADING = 'POST_DELETE_LOADING';
 export const POST_CREATE_FAIL = 'POST_CREATE_FAIL';
 export const POST_CREATE_SUCCESS = 'POST_CREATE_SUCCESS';
 export const TOGGLE_SUCCESS_ALERT_CREATE = 'SHOW_SUCCESS_ALERT_CREATE';
 export const GET_POSTS = 'GET_POSTS';
 export const CLOSE_EDIT_MODAL = 'CLOSE_EDIT_MODAL';
+export const CLOSE_DELETE_DIALOG = 'CLOSE_DELETE_DIALOG';
 
 export type PostType = {
   id: number;
@@ -52,6 +54,14 @@ export interface IsEditLoading {
   type: typeof POST_EDIT_LOADING;
 }
 
+export interface IsDeleteLoading {
+  type: typeof POST_DELETE_LOADING;
+}
+
+export interface CloseDeleteDialog {
+  type: typeof CLOSE_DELETE_DIALOG;
+}
+
 export type PostDispatchTypes =
   | PostLoading
   | PostFail
@@ -59,4 +69,6 @@ export type PostDispatchTypes =
   | GetPosts
   | IsShowCreateAlert
   | CloseEditModal
-  | IsEditLoading;
+  | IsEditLoading
+  | IsDeleteLoading
+  | CloseDeleteDialog;

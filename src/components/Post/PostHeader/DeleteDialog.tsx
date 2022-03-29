@@ -7,15 +7,37 @@ import {
   Button,
   Text,
 } from '@chakra-ui/react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { deletePostAction } from '../../../actions/Post.actions';
+import {
+  getIsCloseDeleteDialog,
+  getIsDeleteLoading,
+} from '../../../actions/selectors';
 
 interface DeleteDialogProps {
   onClose: () => void;
   isOpen: boolean;
+  postId: number;
 }
 
-export function DeleteDialog({ isOpen, onClose }: DeleteDialogProps) {
+export function DeleteDialog({ isOpen, onClose, postId }: DeleteDialogProps) {
   const cancelRef = useRef();
+  const dispatch = useDispatch();
+  const isDeleteLoading = useSelector(getIsDeleteLoading);
+  const isCloseDeleteLoading = useSelector(getIsCloseDeleteDialog);
+
+  const handleDelete = () => {
+    dispatch(deletePostAction(postId));
+  };
+
+  useEffect(() => {
+    if (isCloseDeleteLoading) {
+      onClose();
+    }
+  }, [isCloseDeleteLoading]);
+
   return (
     <AlertDialog
       isOpen={isOpen}
@@ -45,12 +67,13 @@ export function DeleteDialog({ isOpen, onClose }: DeleteDialogProps) {
               </Text>
             </Button>
             <Button
+              isLoading={isDeleteLoading}
               borderRadius="none"
               border="1px"
               bg="white"
               w="110px"
               h="33px"
-              onClick={onClose}
+              onClick={handleDelete}
               ml={3}
             >
               <Text fontWeight="normal" fontSize="xl" lineHeight="7" as="span">

@@ -11,6 +11,8 @@ import {
   TOGGLE_SUCCESS_ALERT_CREATE,
   PostDispatchTypes,
   CLOSE_EDIT_MODAL,
+  POST_DELETE_LOADING,
+  CLOSE_DELETE_DIALOG,
 } from './actionsTypes';
 
 interface Post {
@@ -61,6 +63,31 @@ export const saveEditedPost =
     } catch (error) {
       dispatch({
         type: POST_EDIT_LOADING,
+      });
+      console.log(error);
+    }
+  };
+
+export const deletePostAction =
+  (postId: number) => async (dispatch: Dispatch<PostDispatchTypes>) => {
+    try {
+      dispatch({
+        type: POST_DELETE_LOADING,
+      });
+      await api.delete(`/careers/${postId}/`);
+
+      dispatch({
+        type: POST_DELETE_LOADING,
+      });
+      dispatch({
+        type: CLOSE_DELETE_DIALOG,
+      });
+      dispatch({
+        type: CLOSE_DELETE_DIALOG,
+      });
+    } catch (error) {
+      dispatch({
+        type: POST_DELETE_LOADING,
       });
       console.log(error);
     }

@@ -35,7 +35,7 @@ export default function PostHeader({
       </Heading>
       <Hide below="sm">
         <HStack spacing="7">
-          <ButtonDelete />
+          <ButtonDelete postId={postId} />
           <ButtonEdit oldContent={content} oldTitle={title} postId={postId} />
         </HStack>
       </Hide>

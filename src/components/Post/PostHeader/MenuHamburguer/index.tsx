@@ -21,7 +21,7 @@ export function MenuHamburguer({
         <Icon color="white" fontSize="5xl" as={MdMenu} />
       </MenuButton>
       <MenuList>
-        <MenuItemDelete />
+        <MenuItemDelete postId={postId} />
         <MenuItemEdit
           oldContent={oldContent}
           oldTitle={oldTitle}

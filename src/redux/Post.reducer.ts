@@ -8,6 +8,8 @@ import {
   TOGGLE_SUCCESS_ALERT_CREATE,
   PostType,
   CLOSE_EDIT_MODAL,
+  POST_DELETE_LOADING,
+  CLOSE_DELETE_DIALOG,
 } from '../actions/actionsTypes';
 
 interface DefaultState {
@@ -15,6 +17,8 @@ interface DefaultState {
   isShowCreateAlert: boolean;
   isEditLoading: boolean;
   isCloseEditModal: boolean;
+  isDeleteLoading: boolean;
+  isCloseDeleteLoading: boolean;
   results: PostType[];
   count: number;
   next: string | null;
@@ -25,7 +29,9 @@ const defaultState: DefaultState = {
   isCreateLoading: false,
   isShowCreateAlert: false,
   isEditLoading: false,
+  isDeleteLoading: false,
   isCloseEditModal: false,
+  isCloseDeleteLoading: false,
   results: [],
   count: 0,
   next: null,
@@ -71,6 +77,16 @@ const postReducer = (
       return {
         ...state,
         isEditLoading: !state.isEditLoading,
+      };
+    case POST_DELETE_LOADING:
+      return {
+        ...state,
+        isDeleteLoading: !state.isDeleteLoading,
+      };
+    case CLOSE_DELETE_DIALOG:
+      return {
+        ...state,
+        isCloseDeleteLoading: !state.isCloseDeleteLoading,
       };
     default:
       return state;
