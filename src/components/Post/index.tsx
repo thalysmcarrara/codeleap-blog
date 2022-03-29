@@ -20,7 +20,7 @@ export default function Post({ postData }: PostProps) {
       borderColor="gray.300"
     >
       <PostHeader title={title} content={content} postId={id} />
-      <Stack spacing="6" direction="column" p="6" overflowY="scroll" h="100%">
+      <Stack spacing="6" direction="column" p="6" h="100%">
         <PostInfo author={author} createdAt={created_datetime} />
         <Text textAlign="initial">{content}</Text>
       </Stack>
