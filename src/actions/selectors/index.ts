@@ -18,3 +18,6 @@ export const getIsDeleteLoading = (state: RootStore) =>
 
 export const getIsCloseDeleteDialog = (state: RootStore) =>
   state.posts.isCloseDeleteLoading;
+
+export const getNextLink = (state: RootStore) => state.posts.next;
+export const getPreviousLink = (state: RootStore) => state.posts.previous;

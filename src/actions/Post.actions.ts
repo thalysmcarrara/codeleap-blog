@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 
+import config from '../config';
 import api from '../service/api';
 import {
   POST_CREATE_FAIL,
@@ -15,6 +16,10 @@ import {
   CLOSE_DELETE_DIALOG,
 } from './actionsTypes';
 
+const {
+  constants: { API_BASE_URL },
+} = config;
+
 interface Post {
   username: string;
   title: string;
@@ -28,10 +33,11 @@ interface SaveEditedIdParams {
 }
 
 export const getPostsAction =
-  () => async (dispatch: Dispatch<PostDispatchTypes>) => {
+  (link = '/careers/') =>
+  async (dispatch: Dispatch<PostDispatchTypes>) => {
     try {
       const response: GetRequestPostsType = await api
-        .get('/careers/')
+        .get(link.replace(API_BASE_URL, ''))
         .then((res) => res.data);
 
       dispatch({

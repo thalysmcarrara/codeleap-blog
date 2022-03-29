@@ -9,7 +9,7 @@ import {
   getPostsSelector,
 } from '../actions/selectors';
 import { getPersistedUserAction } from '../actions/User.actions';
-import { Post, FormCreatePost } from '../components';
+import { Post, FormCreatePost, Pagination } from '../components';
 import Header from '../components/Header';
 
 export default function Posts() {
@@ -61,6 +61,7 @@ export default function Posts() {
             <Post key={post.id} postData={post} />
           ))}
         </VStack>
+        <Pagination />
       </Flex>
     </Flex>
   );
